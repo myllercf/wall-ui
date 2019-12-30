@@ -1,0 +1,21 @@
+<section >
+
+    <div >
+       <h1>Mural de Avisos</h1>
+       <p>Click na linha para ver os detalhes</p>
+    </div>
+  
+    <table style="width:100%">
+      <tr>
+        <th>Id</th>
+        <th>Título</th>
+        <th>Data</th>
+      </tr>
+      <tr *ngFor="let warning of warnings" [routerLink]="['/mural', warning.id]">
+        <td>{{warning?.id}}</td>
+        <td>{{warning?.title}}</td>
+        <td>{{warning?.publishDate | date: 'dd/MM/yyyy'}}</td>
+      </tr>
+    </table>
+  
+  </section>
