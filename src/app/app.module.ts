@@ -9,13 +9,15 @@ import { HeaderComponent } from './header/header.component';
 import { WarningWallComponent } from './warning-wall/warning-wall.component';
 import { HomeComponent } from './home/home.component';
 import {ROUTES} from './app.router';
+import { WarningDetailsComponent } from './warning-details/warning-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     WarningWallComponent,
-    HomeComponent
+    HomeComponent,
+    WarningDetailsComponent
   ],
   imports: [
     BrowserModule,

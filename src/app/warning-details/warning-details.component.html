@@ -1,0 +1,25 @@
+<section class="content">
+
+    <div class="jumbotron welcome-jumbotron">
+       <h1>Detalhes do aviso</h1>
+    </div>
+  
+    <div class="wrapper">
+      <div class="box1">
+          <strong>Id:</strong><br/>{{warning?.id}}
+      </div>
+      <div class="box2">
+          <strong>Título:</strong><br/>{{warning?.title}}
+      </div>
+      <div class="box3">
+          <strong>Descrição:</strong><br/>{{warning?.description}}
+      </div>
+      <div class="box4">
+          <strong>Data publicação:</strong><br/>{{warning?.publishDate | date: 'dd/MM/yyyy'}}
+      </div>
+      <div class="box5">
+          <strong>Data visualização:</strong><br/>{{warning?.viewDate | date: 'dd/MM/yyyy'}}
+      </div>
+   </div>
+  
+  </section>

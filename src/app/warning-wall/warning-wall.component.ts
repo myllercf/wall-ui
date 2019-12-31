@@ -14,10 +14,10 @@ export class WarningWallComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.listar();
+    this.getAllWarningPaged();
   }
 
-  listar(){
+  getAllWarningPaged(){
     this.warnings = [
       {'id':1, 'title': 'Provas', 'description':'As provas finais irão ocorrer na semana de 16 a 20 de dezembro', 'publishDate': new Date(), 'viewDate': new Date()},
       {'id':2, 'title': 'Matrículas', 'description': 'O período de matrículas dos cursos regulares para o próximo semestre está encerrado. Alunos que perderam o prazo devem entrar em contato com a secretaria.', 'publishDate': new Date(), 'viewDate': new Date()},
