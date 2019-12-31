@@ -1,0 +1,22 @@
+<section class="content">
+
+    <div class="jumbotron welcome-jumbotron">
+       <h1>Crie o próximo aviso</h1>
+    </div>
+
+    <form [formGroup]="warningForm" (ngSubmit)="onFormSubmit()">
+      <div class="form-group">
+          <label for="name">Título:</label>
+          <input formControlName="title"  placeholder="Digite o título (cinco caracteres)">
+      </div>
+      <div class="form-group">
+          <label for="name">Descrição:</label>
+          <input formControlName="description"  placeholder="Digite a descrição  (dez caracteres)">
+      </div>
+
+      <div class="button">
+        <button [disabled]="!butonIsValid()" class="btn btn-success" type="submit">Postar Aviso</button> 
+      </div>
+  </form>
+  
+  </section>
