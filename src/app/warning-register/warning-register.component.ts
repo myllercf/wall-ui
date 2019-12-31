@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
+import { WarningService } from '../warning.service';
 import { Warning } from '../warning.model';
-import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-warning-register',
@@ -22,7 +22,7 @@ export class WarningRegisterComponent implements OnInit {
 
   submitted = false;
 
-  constructor() { }
+  constructor(private service: WarningService) { }
 
   ngOnInit() {
   }
@@ -32,10 +32,12 @@ export class WarningRegisterComponent implements OnInit {
   }
 
   onFormSubmit(): void {
-    console.log('Name:' + this.title.value);
-    console.log('Series:' + this.description.value);
-    console.log(this.butonIsValid());
     
+    //this.warning = new Warning( this.warningForm.get('title').value,  this.warningForm.get('description').value);
+    this.warning = {'id':1, 'title': 'Provas', 'description':'As provas finais irão ocorrer na semana de 16 a 20 de dezembro', 'publishDate': new Date(), 'viewDate': new Date()};
+    console.log(this.warning);
+    
+    this.service.createWarning(this.warning);
   }
 
 }
