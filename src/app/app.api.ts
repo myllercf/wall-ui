@@ -1,1 +1,1 @@
-export const WARNING_API = 'http://localhost:8080/aviso';
+export const WARNING_API = 'http://localhost:8080';

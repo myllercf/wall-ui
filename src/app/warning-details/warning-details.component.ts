@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Warning } from '../warning.model';
+import { WarningService } from '../warning.service';
 
 @Component({
   selector: 'app-warning-details',
@@ -12,14 +13,17 @@ export class WarningDetailsComponent implements OnInit {
 
   warning: Warning;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(
+    private service: WarningService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.getWarning();
+    this.getWarning(this.route.snapshot.params['id']);
   }
 
-  getWarning(){
-    this.warning = {'id':1, 'title': 'Provas', 'description':'As provas finais irão ocorrer na semana de 16 a 20 de dezembro', 'publishDate': new Date(), 'viewDate': new Date()};
+  getWarning(id: number){
+    this.service.getWarning(id)
+    .subscribe(warning => this.warning = warning);
   }
 
 }

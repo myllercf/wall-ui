@@ -33,10 +33,7 @@ export class WarningRegisterComponent implements OnInit {
 
   onFormSubmit(): void {
     
-    //this.warning = new Warning( this.warningForm.get('title').value,  this.warningForm.get('description').value);
-    this.warning = {'id':1, 'title': 'Provas', 'description':'As provas finais irão ocorrer na semana de 16 a 20 de dezembro', 'publishDate': new Date(), 'viewDate': new Date()};
-    console.log(this.warning);
-    
+    this.warning = new Warning(null, this.warningForm.get('title').value,  this.warningForm.get('description').value, null, null);    
     this.service.createWarning(this.warning);
   }
 

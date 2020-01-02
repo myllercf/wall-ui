@@ -1,5 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -7,10 +7,10 @@ import { HeaderComponent } from './header/header.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { Resolver } from './resolver';
 
 import { WarningWallComponent } from './warning-wall/warning-wall.component';
 import { HomeComponent } from './home/home.component';
-import {ROUTES} from './app.router';
 import { WarningDetailsComponent } from './warning-details/warning-details.component';
 import { WarningRegisterComponent } from './warning-register/warning-register.component';
 import { WarningService } from './warning.service';
@@ -26,12 +26,12 @@ import { WarningService } from './warning.service';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
     HttpClientModule,
-    RouterModule.forRoot(ROUTES)
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
-  providers: [WarningService],
+  providers: [WarningService,
+              Resolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 
 import { Warning } from './warning.model';
+import { WarningPageable } from './warning-pageable.model';
 import { WARNING_API } from './app.api';
 
 @Injectable({
@@ -11,25 +12,40 @@ import { WARNING_API } from './app.api';
 })
 export class WarningService {
 
-  //url: string = `${WARNING_API}`;
-  url: string = 'http://localhost:8080/aviso'
+  url: string = `${WARNING_API}/aviso`;
 
   constructor(private http: HttpClient){}
 
-  createWarning(warning: Warning): Observable<Warning> {
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json'
+    })
+  };
 
-    const httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type':  'application/json',
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'POST',
-          'Access-Control-Allow-Headers': 'Origin, Content-Type',
-        })
-      };
-
-    return this.http.post<Warning>(this.url, warning, httpOptions)
+  getAllWarningPaged(): Observable<WarningPageable> {
+    return this.http.get<WarningPageable>(this.url)
     .pipe(
-      retry(1),
+      retry(3),
+      catchError(this.errorHandl)
+    )
+  }
+
+  getWarning(id: number): Observable<Warning>{
+    return this.http.get<Warning>(this.url+'/'+id)
+    .pipe(
+      retry(3),
+      catchError(this.errorHandl)
+    )
+  }
+
+  createWarning(warning: Warning): Observable<Warning> {
+    console.log(this.url);
+    console.log(warning);
+    console.log(this.httpOptions);      
+
+    return this.http.post<Warning>(this.url, warning, this.httpOptions)
+    .pipe(
+      retry(3),
       catchError(this.errorHandl)
     )
   }
@@ -37,10 +53,8 @@ export class WarningService {
   errorHandl(error) {
     let errorMessage = '';
     if(error.error instanceof ErrorEvent) {
-      // Get client-side error
       errorMessage = error.error.message;
     } else {
-      // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
     console.log(errorMessage);
