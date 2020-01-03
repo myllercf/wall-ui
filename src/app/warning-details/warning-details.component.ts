@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Warning } from '../warning.model';
 import { WarningService } from '../warning.service';
@@ -15,7 +15,8 @@ export class WarningDetailsComponent implements OnInit {
 
   constructor(
     private service: WarningService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
     this.getWarning(this.route.snapshot.params['id']);
@@ -24,6 +25,11 @@ export class WarningDetailsComponent implements OnInit {
   getWarning(id: number){
     this.service.getWarning(id)
     .subscribe(warning => this.warning = warning);
+  }
+
+  deleteWarning(id: number){
+    this.service.deleteWarning(id);
+    this.router.navigate(['/mural']);
   }
 
 }

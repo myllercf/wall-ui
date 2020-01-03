@@ -50,6 +50,16 @@ export class WarningService {
     )
   }
 
+  deleteWarning(id: number){
+    console.log(this.url+'/'+id);
+    
+    this.http.delete<string>(this.url+'/'+id)
+    .pipe(
+      retry(3),
+      catchError(this.errorHandl)
+    )
+  }
+
   errorHandl(error) {
     let errorMessage = '';
     if(error.error instanceof ErrorEvent) {
