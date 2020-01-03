@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 
@@ -30,6 +30,23 @@ export class WarningService {
     )
   }
 
+  getAllWarningPaged2(pageNumber: number, pageSize: number, sortBy: string): Observable<WarningPageable> {
+    let params = new HttpParams();
+
+    //params.set('pageNumber', pageNumber.toString());
+    //params.set('pageSize', pageSize.toString());
+    //params.set('sortBy', sortBy);
+    params.set('pageNumber', '0');
+    params.set('pageSize', '3');
+    params.set('sortBy', 'id');
+
+    return this.http.get<WarningPageable>(this.url, {params: params})
+    .pipe(
+      retry(3),
+      catchError(this.errorHandl)
+    )
+  }
+
   getWarning(id: number): Observable<Warning>{
     return this.http.get<Warning>(this.url+'/'+id)
     .pipe(
@@ -53,7 +70,7 @@ export class WarningService {
   deleteWarning(id: number){
     console.log(this.url+'/'+id);
     
-    this.http.delete<string>(this.url+'/'+id)
+    return this.http.delete<string>(this.url+'/'+id)
     .pipe(
       retry(3),
       catchError(this.errorHandl)

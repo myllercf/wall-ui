@@ -11,11 +11,14 @@
         <th>Título</th>
         <th>Data</th>
       </tr>
-      <tr *ngFor="let warning of warnings" [routerLink]="['/mural', warning.id]">
+      <tr *ngFor="let warning of warnings | paginate: { itemsPerPage: pageSize, currentPage: pageNumber, totalItems: totalPage }" [routerLink]="['/mural', warning.id]">
         <td>{{warning?.id}}</td>
         <td>{{warning?.title}}</td>
         <td>{{warning?.publishDate | date: 'dd/MM/yyyy'}}</td>
       </tr>
     </table>
+    <div>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
   
   </section>

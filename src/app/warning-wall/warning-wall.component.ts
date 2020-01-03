@@ -13,7 +13,10 @@ import { WarningPageable } from '../warning-pageable.model';
 export class WarningWallComponent implements OnInit {
 
   warnings: Warning[];
-  warningPageable: WarningPageable = new WarningPageable(null, null, null, null, null, null);
+  warningPageable: WarningPageable;
+  pageNumber: number = 0;
+  pageSize: number = 10;
+  totalPage: number;
 
   constructor(
     private service: WarningService,
@@ -22,10 +25,13 @@ export class WarningWallComponent implements OnInit {
   ngOnInit() {
     this.warningPageable = this.route.snapshot.data.warningPageable;
     this.warnings = this.warningPageable[0].warnings;
+    //this.pageNumber = this.warningPageable[0].page;
+    //this.pageSize = this.warningPageable[0].size;
+    //this.totalPage = this.warningPageable[0].total;
   }
 
   getAllWarningPaged(){
-    this.service.getAllWarningPaged()
+    this.service.getAllWarningPaged2(this.pageNumber, this.pageSize, 'id')
       .subscribe(warningPageable => this.warningPageable = warningPageable);
   }
 

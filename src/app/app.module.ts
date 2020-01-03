@@ -8,6 +8,7 @@ import { HeaderComponent } from './header/header.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { Resolver } from './resolver';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { WarningWallComponent } from './warning-wall/warning-wall.component';
 import { HomeComponent } from './home/home.component';
@@ -28,7 +29,8 @@ import { WarningService } from './warning.service';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule
   ],
   providers: [WarningService,
               Resolver],
